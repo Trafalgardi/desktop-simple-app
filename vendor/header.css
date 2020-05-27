@@ -1,0 +1,65 @@
+html,
+body {
+  height: 100%;
+}
+
+header{
+  -webkit-app-region: drag;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  color: #a0a0a0;
+  align-self: stretch;
+}
+#desktop-app-title-bar{
+  height: 28px;
+  background: #24292e;
+  border-bottom: 1px solid #000;
+}
+.option{
+  width: 45px;
+  height: 100%
+  padding: 0px 10px;
+  text-align: center;
+  font-size: 1rem;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+.option:hover{
+  background-color: red;
+  color: #fff;
+}
+#minimize:hover, #maximize:hover{
+  background-color: #888;
+  color: #fff;
+}
+
+svg{
+  fill: currentColor;
+}
+#desktop-app-title-bar .resize-handle.top {
+  width: 100%;
+  height: 3px;
+}
+#desktop-app-title-bar .resize-handle.left {
+  width: 3px;
+  height: 28px;
+}
+#desktop-app-title-bar .resize-handle {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    -webkit-app-region: no-drag;
+}
+#desktop-app-container{
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-align: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}

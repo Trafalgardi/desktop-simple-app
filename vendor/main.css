@@ -1,0 +1,27 @@
+.inner {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.625em;
+    right: 1rem;
+  }
+.swither-position{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+.dathick{
+    height: 4rem;
+    width: 20rem;
+    margin-top: 1rem;
+    border: 1px solid black;
+}
+.btn-black {
+    color: black;
+    border: 1px solid;
+}
+
+.btn-black:hover {
+    color: white;
+    background-color: #00bfff;
+    border-color: #f8f9fa;
+  }
