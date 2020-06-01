@@ -1,7 +1,6 @@
 //Make Node.js API calls in this file
 'use strict'
 const remote = require('electron').remote
-
 var win = remote.getCurrentWindow()
 
 document.getElementById('headerClose').addEventListener('click', () => {
