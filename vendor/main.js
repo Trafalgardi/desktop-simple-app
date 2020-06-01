@@ -6,7 +6,8 @@ let stove_temperature = document.getElementById("stove-temperature");
 let ommetr = document.getElementById("ommetr");
 let isOmmetrActived = false;
 //удельное сопративление TODO временно
-let p = 0.016;
+let p = 1.7; //10^-8
+let alfap = 0.0043;
 let option;
 
 function changeOption(select) {
@@ -60,7 +61,6 @@ function startTimer(func) {
   timerId = setInterval(() => func(), 3000);
 }
 
-
 function getData(element_id) {
   var el = document.getElementById(element_id)
   console.log(el.dataset.innerdata);
@@ -75,31 +75,26 @@ function setData(element_id, data) {
 
 //#region Calc
 function ommetrCalc(temperature) {
-  var r = getRandomInt(temperature, temperature + 10)
-  setData("ommetr", r)
-  ommetr.innerHTML = r;
+  let R = rNomCalc() * (1 + alfap * (temperature - 20))
+  setData("ommetr", R.toFixed(2))
+  ommetr.innerHTML = R.toFixed(2);
 }
 
-function rZeroCalc() {
-  let L = parseInt(document.getElementById("lenght").value, 10)
-  var R = (p * L) / sCalc()
-  return R
+function rNomCalc() {
+  let L = parseInt(document.getElementById("lenght").value, 10) / 100
+  let temp = L / sCalc();
+  var R = p * temp
+  return (R / 100000).toFixed(3)
 }
 
 function sCalc() {
-  let D = parseFloat(document.getElementById("diametr").value, 10)
+  let D = parseFloat(document.getElementById("diametr").value, 10) / 1000
   var S = (Math.PI * Math.pow(D, 2)) / 4;
   return S
 }
 
 //#endregion
 
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
-}
 //#region function for buttons
 let indexRow = 0;
 let table = document.getElementById("table")
@@ -167,7 +162,7 @@ function createChart() {
 
 function saveTable() {
   const doc = new jsPDF();
-  //doc.addFont("vendor/PTSans.ttf", "PTSans", "normal");
+  
   doc.setFont('Roboto-Regular', 'normal');
   doc.setFontSize(40);
 
@@ -206,4 +201,3 @@ function Base64Encode(str, encoding = 'utf-8') {
   var bytes = new (TextEncoder || TextEncoderLite)(encoding).encode(str);        
   return base64js.fromByteArray(bytes);
 }
-
