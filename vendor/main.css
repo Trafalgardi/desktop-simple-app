@@ -55,3 +55,7 @@ thead, tbody tr {
     width:100%;
     table-layout:fixed;
 }
+.disabled{
+    background-color: #e9ecef;
+    cursor: default;
+}

@@ -3,12 +3,62 @@ let chart;
 
 let timerId;
 let stove_temperature = document.getElementById("stove-temperature");
-let ommetr = document.getElementById("ommetr");
-let isOmmetrActived = false;
-//удельное сопративление TODO временно
-let p = 1.7; //10^-8
-let alfap = 0.0043;
+let inductance = document.getElementById("inductance");
+let isInductanceActived = false;
+
+//Табличные данные
+//Число витков
+let n = 1;
+let D = 2.5;
+let d = 1.5;
+//М- магнитнитная проницаемость из экспериментальных данных
+let m = 60;
+//М0- начальная магнитная проницаемость
+let m0 = 80;
+//l-Длина средней линии
+let l = 0;
+//s- площадь поперечного сечения
+let s = 0;
+
 let option;
+
+init(1)
+
+function init(variant){
+  document.getElementById("n").value = n
+  lCalc();
+  sCalc();
+}
+
+//#region Calc
+//Индуктивность L= M * M0 * n^2 * S / l
+
+function InductanceCalc(temperature) {
+  let one = m * m0;
+  let two = one * Math.pow(n, 2);
+  let three = two * s / l;
+  setData("inductance", three.toFixed(2))
+  inductance.innerHTML = three.toFixed(2);
+}
+//l-Длина средней линии - (D+d/2)pi
+function lCalc() {
+  let one = d / 2;
+  let two = D + one;
+  let three = two / Math.PI;
+  console.log(three)
+  l = three;
+  document.getElementById("l").value = three.toFixed(3)
+}
+//S- площадь поперечного сечения (pi*d^2/4)
+function sCalc() {
+  let one = Math.pow(d, 2);
+  let two = Math.PI * one;
+  let three = two / 4;
+  console.log(three)
+  s = three;
+  document.getElementById("s").value = three.toFixed(3)
+}
+//#endregion
 
 function changeOption(select) {
   var selected = select.options[select.selectedIndex].value;
@@ -27,22 +77,29 @@ function stove_toggle(isActived) {
   }
 }
 
-function ommetr_toggle(bool) {
-  isOmmetrActived = bool
+function inductance_toggle(bool) {
+  isInductanceActived = bool
   var value = parseInt(getData("stove-temperature"), 10)
-  if (isOmmetrActived) ommetrCalc(value)
-}
+  var element = document.getElementById("inductance_disabled");
 
+  if (isInductanceActived) {
+    element.classList.remove("disabled");
+    InductanceCalc(value) 
+  }else{
+    element.classList.add("disabled");
+  }
+}
+const step = 1;
 function stove_on() {
   var value = parseInt(getData("stove-temperature"), 10)
   if (value === 150) {
     clearInterval(timerId)
     return
   }
-  value += 5;
+  value += step;
   setData("stove-temperature", value)
   stove_temperature.innerHTML = value;
-  if (isOmmetrActived) ommetrCalc(value)
+  if (isInductanceActived) InductanceCalc(value)
 }
 
 function stove_off() {
@@ -51,14 +108,14 @@ function stove_off() {
     clearInterval(timerId)
     return
   }
-  value -= 5;
+  value -= step;
   setData("stove-temperature", value)
   stove_temperature.innerHTML = value;
-  if (isOmmetrActived) ommetrCalc(value)
+  if (isInductanceActived) InductanceCalc(value)
 }
 
 function startTimer(func) {
-  timerId = setInterval(() => func(), 3000);
+  timerId = setInterval(() => func(), 5000);
 }
 
 function getData(element_id) {
@@ -73,27 +130,7 @@ function setData(element_id, data) {
   return data
 }
 
-//#region Calc
-function ommetrCalc(temperature) {
-  let R = rNomCalc() * (1 + alfap * (temperature - 20))
-  setData("ommetr", R.toFixed(2))
-  ommetr.innerHTML = R.toFixed(2);
-}
 
-function rNomCalc() {
-  let L = parseInt(document.getElementById("lenght").value, 10) / 100
-  let temp = L / sCalc();
-  var R = p * temp
-  return (R / 100000).toFixed(3)
-}
-
-function sCalc() {
-  let D = parseFloat(document.getElementById("diametr").value, 10) / 1000
-  var S = (Math.PI * Math.pow(D, 2)) / 4;
-  return S
-}
-
-//#endregion
 
 //#region function for buttons
 let indexRow = 0;
@@ -107,10 +144,10 @@ function recordData() {
   <tr>
     <th scope="row">${indexRow}</th>
     <td>${getData("stove-temperature")}</td>
-    <td>${getData("ommetr")}</td>
+    <td>${getData("inductance")}</td>
   </tr>`;
   temps.push(getData("stove-temperature"))
-  dataCharts.push(getData("ommetr"))
+  dataCharts.push(getData("inductance"))
   table.insertAdjacentHTML("beforeend", data)
 }
 
@@ -123,10 +160,10 @@ function clearData() {
 
 function createChart() {
   let data = {
-    labels: temps,
+    labels: dataCharts,
     datasets: [{
       label: "",
-      data: dataCharts,
+      data: temps,
       lineTension: 0,
       fill: false,
       borderColor: 'orange',
@@ -138,7 +175,8 @@ function createChart() {
       pointHoverRadius: 10,
       pointHitRadius: 30,
       pointBorderWidth: 2,
-      pointStyle: 'rectRounded'
+      pointStyle: 'rectRounded',
+      cubicInterpolationMode: "monotone"
     }]
   };
 
@@ -197,7 +235,3 @@ function saveTable() {
   doc.save('table.pdf')
 }
 
-function Base64Encode(str, encoding = 'utf-8') {
-  var bytes = new (TextEncoder || TextEncoderLite)(encoding).encode(str);        
-  return base64js.fromByteArray(bytes);
-}
