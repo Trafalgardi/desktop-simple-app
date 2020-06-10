@@ -47,13 +47,14 @@
                 <h3 class="mb-0">LCR-метр</h3>
                 <label for="inductance">
                   <h5 class="mb-0">подключен к материалу</h5>
-                </label><!--<span>* 10<sup><small>-5</small></sup>-->
-                <div id="inductance_disabled" class="disabled box-text"><span id="inductance" data-innerdata="20"> 20</span>  Om</span></div>
+                </label><!--<span id="inductance_size">* 10<sup><small>-3</small></sup>-->
+                <div id="inductance_disabled" class="disabled box-text"><span id="inductance" data-innerdata="20"> 20</span><span id="inductance_size"> мГн</span></div>
                 <label for="inductance-toggle">
                   <h5 class="mb-0">Выключатель</h5>
                 </label>
                 <input onchange="inductance_toggle(this.checked)" id="inductance-toggle" type="checkbox" data-toggle="toggle"
                   data-onstyle="outline-primary" data-offstyle="outline-secondary">
+                <div style="margin-left: 27%;"><img src="vendor/lcr.png" width="100px" ></div>
               </div>
             </div>
           </div>
@@ -74,6 +75,7 @@
                 </label>
                 <input onchange="stove_toggle(this.checked)" id="stove-toggle" type="checkbox" data-toggle="toggle"
                   data-onstyle="outline-primary" data-offstyle="outline-secondary">
+                  <div style="margin-left: 21%;"><img src="vendor/pech.png" width="150px"></div>
               </div>
             </div>
           </div>
@@ -118,7 +120,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">T, oC</th>
-                      <th scope="col">R, Ом</th>
+                      <th scope="col">L, мГн</th>
                     </tr>
                   </thead>
                   <tbody style="overflow-y:scroll;" id="table">

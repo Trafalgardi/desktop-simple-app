@@ -4,15 +4,18 @@ let chart;
 let timerId;
 let stove_temperature = document.getElementById("stove-temperature");
 let inductance = document.getElementById("inductance");
+let inductance_size = document.getElementById("inductance_size");
 let isInductanceActived = false;
 
+const x = [20, 30, 40, 50, 70, 80, 90, 94, 98, 100, 106, 110, 114, 120, 130, 140, 150]
+//М- магнитнитная проницаемость из экспериментальных данных
+const y = [210, 211, 212, 218, 238, 254, 263, 264, 258, 250, 200, 145, 95, 37, 7, 3, 2]
 //Табличные данные
 //Число витков
-let n = 1;
+let n = 10;
 let D = 2.5;
 let d = 1.5;
-//М- магнитнитная проницаемость из экспериментальных данных
-let m = 60;
+
 //М0- начальная магнитная проницаемость
 let m0 = 80;
 //l-Длина средней линии
@@ -24,8 +27,10 @@ let option;
 
 init(1)
 
-function init(variant){
+function init(variant) {
   document.getElementById("n").value = n
+  inductance_size.innerHTML = ""
+  inductance.innerHTML = "0";
   lCalc();
   sCalc();
 }
@@ -33,18 +38,39 @@ function init(variant){
 //#region Calc
 //Индуктивность L= M * M0 * n^2 * S / l
 
+
+function interpolation(temperature, i) {
+  const nearestBelow = (input, lookup) => lookup.reduce((prev, curr) => input >= curr ? curr : prev);
+  let x0 = nearestBelow(i, x);
+
+  let x1 = x[x.indexOf(nearestBelow(i, x))+1];
+  let y0 = y[x.indexOf(nearestBelow(i, x))];
+  let y1 = y[x.indexOf(nearestBelow(i, x))+1];
+  let Y = y0 + (temperature - x0) * ((y1 - y0) / (x1 - x0));
+
+  return Y
+}
+
 function InductanceCalc(temperature) {
-  let one = m * m0;
+  
+  let M = 0;
+  if (x.indexOf(temperature) == -1) {
+    M = interpolation(temperature, x.indexOf(temperature))
+    console.log(M)
+  }else{
+    M = y[x.indexOf(temperature)]
+  }
+  let one = M * m0;
   let two = one * Math.pow(n, 2);
   let three = two * s / l;
-  setData("inductance", three.toFixed(2))
-  inductance.innerHTML = three.toFixed(2);
+  setData("inductance", (three / 1000000).toFixed(4))
+  inductance.innerHTML = (three / 1000000).toFixed(4);
 }
 //l-Длина средней линии - (D+d/2)pi
 function lCalc() {
   let one = d / 2;
   let two = D + one;
-  let three = two / Math.PI;
+  let three = two * Math.PI;
   console.log(three)
   l = three;
   document.getElementById("l").value = three.toFixed(3)
@@ -82,14 +108,19 @@ function inductance_toggle(bool) {
   var value = parseInt(getData("stove-temperature"), 10)
   var element = document.getElementById("inductance_disabled");
 
+
   if (isInductanceActived) {
     element.classList.remove("disabled");
-    InductanceCalc(value) 
-  }else{
+    inductance_size.innerHTML = " мГн";
+    InductanceCalc(value)
+  } else {
+    inductance_size.innerHTML = "";
+    inductance.innerHTML = "0";
     element.classList.add("disabled");
   }
 }
 const step = 1;
+
 function stove_on() {
   var value = parseInt(getData("stove-temperature"), 10)
   if (value === 150) {
@@ -200,7 +231,7 @@ function createChart() {
 
 function saveTable() {
   const doc = new jsPDF();
-  
+
   doc.setFont('Roboto-Regular', 'normal');
   doc.setFontSize(40);
 
@@ -218,9 +249,9 @@ function saveTable() {
   doc.autoTable(columns, rows, {
     theme: 'grid',
     styles: {
-			cellPadding: 0.5,
-			fontSize: 12
-		},
+      cellPadding: 0.5,
+      fontSize: 12
+    },
     margin: {
       top: 75
     }
@@ -234,4 +265,3 @@ function saveTable() {
 
   doc.save('table.pdf')
 }
-
