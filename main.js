@@ -10,10 +10,10 @@ function createWindow () {
       defaultEncoding: 'UTF-8'
     },
     minWidth: 1000,
-    minHeight: 833,
+    minHeight: 900,
     center: true,
     width: 1000,
-    height: 833,
+    height: 900,
     frame: false
   })
 
