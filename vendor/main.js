@@ -191,10 +191,10 @@ function clearData() {
 
 function createChart() {
   let data = {
-    labels: dataCharts,
+    labels: temps,
     datasets: [{
       label: "",
-      data: temps,
+      data: dataCharts,
       lineTension: 0,
       fill: false,
       borderColor: 'orange',
