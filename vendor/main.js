@@ -55,10 +55,12 @@ function InductanceCalc(temperature) {
   
   let M = 0;
   if (x.indexOf(temperature) == -1) {
-    M = interpolation(temperature, x.indexOf(temperature))
+    
+    M = interpolation(temperature, temperature)
     console.log(M)
   }else{
     M = y[x.indexOf(temperature)]
+    console.log(M)
   }
   let one = M * m0;
   let two = one * Math.pow(n, 2);
@@ -146,7 +148,7 @@ function stove_off() {
 }
 
 function startTimer(func) {
-  timerId = setInterval(() => func(), 5000);
+  timerId = setInterval(() => func(), 1000);
 }
 
 function getData(element_id) {
@@ -188,7 +190,8 @@ function clearData() {
   dataCharts = [0]
   table.innerHTML = "";
 }
-
+//labels: temps,
+//      data: dataCharts,
 function createChart() {
   let data = {
     labels: temps,
