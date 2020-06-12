@@ -242,7 +242,7 @@ function saveTable() {
 
   doc.text("Table", 35, 50);
 
-  var columns = ["#", "T, oC", "R, Om"]
+  var columns = ["#", "T, oC", "L, Gn"]
   var rows = []
   for (let i = 1; i < dataCharts.length; i++) {
     let t = [i, temps[i], dataCharts[i]]
