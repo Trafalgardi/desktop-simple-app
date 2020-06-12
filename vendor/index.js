@@ -181,7 +181,6 @@ function recordData() {
   </tr>`;
   temps.push(getData("stove-temperature"))
   dataCharts.push(getData("inductance"))
-  chart.update();
   table.insertAdjacentHTML("beforeend", data)
 }
 
