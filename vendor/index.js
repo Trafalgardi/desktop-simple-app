@@ -148,7 +148,7 @@ function stove_off() {
 }
 
 function startTimer(func) {
-  timerId = setInterval(() => func(), 1000);
+  timerId = setInterval(() => func(), 5000);
 }
 
 function getData(element_id) {
