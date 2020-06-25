@@ -38,7 +38,6 @@
         </svg></div>
     </header>
     <div id="main" class="container" style="display: none;">
-      <h1 id="title"></h1>
       <div id="ignorePDF" class="row mb-2">
         <div class="col-md-8" id="background">
           <div id="LCR"><img src="vendor/images/LCR.png"></div>
@@ -67,49 +66,6 @@
               <input class="checkbox_input" onchange="inductance_toggle(this.checked)" id="inductance-toggle" type="checkbox">
               <span class="checkmark dot"></span>
             </label>
-          </div>
-        </div>
-        <div class="col-md-4" style="display: none;">
-          <div
-            class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <div class="card-text mb-auto">
-                <h3 class="mb-0">LCR-метр</h3>
-                <label for="inductance">
-                  <h5 class="mb-0">подключен к материалу</h5>
-                </label>
-                <!--<span id="inductance_size">* 10<sup><small>-3</small></sup>
-                <div id="inductance_disabled" class="disabled box-text"><span id="inductance" data-innerdata="20">
-                    20</span><span id="inductance_size"> мГн</span></div>-->
-                <label for="inductance-toggle">
-                  <h5 class="mb-0">Выключатель</h5>
-                </label>
-                <!--<input onchange="inductance_toggle(this.checked)" id="inductance-toggle" type="checkbox"
-                  data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">-->
-                <div style="margin-left: 0;"><img src="vendor/LCR.jpg" width="250px"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" style="display: none;">
-          <div
-            class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <div class="card-text mb-auto">
-                <h3 class="mb-0">Печь</h3>
-                <label for="box-text">
-                  <h5 class="mb-0">Температура</h5>
-                </label>
-                <!--<div class="box-text"><span id="stove-temperature" data-innerdata="20"> 20</span> <span> &deg;</span>
-                </div>-->
-                <label for="stove-toggle">
-                  <h5 class="mb-0">Выключатель</h5>
-                </label>
-                <input onchange="stove_toggle(this.checked)" id="stove-toggle" type="checkbox" data-toggle="toggle"
-                  data-onstyle="outline-primary" data-offstyle="outline-secondary">
-                <div style="margin-left: 21%;"><img src="vendor/pech.png" width="150px"></div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="col-md-4">

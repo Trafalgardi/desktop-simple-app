@@ -11,13 +11,13 @@ header{
   width: 100%;
   flex-direction: row-reverse;
   justify-content: flex-start;
-  color: #a0a0a0;
+  color: black;
   align-self: stretch;
 }
 #desktop-app-title-bar{
   height: 28px;
-  background: #24292e;
-  border-bottom: 1px solid #000;
+  background: #54a7fa;
+  border-bottom: 1px solid #1a3652;
 }
 .option{
   width: 45px;

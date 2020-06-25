@@ -92,7 +92,7 @@ function changeOption(select) {
   var selected = select.options[select.selectedIndex].value;
   document.getElementById("option").style.display = "none"
   document.getElementById("main").style.display = ""
-  document.getElementById("title").innerHTML = `Вариант ${selected}`
+  //document.getElementById("title").innerHTML = `Вариант ${selected}`
   option = selected
 }
 
