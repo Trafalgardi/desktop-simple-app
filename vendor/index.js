@@ -174,8 +174,8 @@ function setData(element_id, data) {
 //#region function for buttons
 let indexRow = 0;
 let table = document.getElementById("table")
-let temps = [0]
-let dataCharts = [0]
+let temps = []
+let dataCharts = []
 
 function recordData() {
   indexRow++;
