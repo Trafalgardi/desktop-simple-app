@@ -16,6 +16,7 @@
   <link href="vendor/main.css" rel="stylesheet">
   <link href="vendor/charts/Chart.min.css" rel="stylesheet">
   <link href="vendor/header.css" rel="stylesheet">
+  <link href="vendor/styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -39,7 +40,36 @@
     <div id="main" class="container" style="display: none;">
       <h1 id="title"></h1>
       <div id="ignorePDF" class="row mb-2">
-        <div class="col-md-4">
+        <div class="col-md-8" id="background">
+          <div id="LCR"><img src="vendor/images/LCR.png"></div>
+          <div id="Pech"><img src="vendor/images/Pech.png"></div>
+          <div id="PechButton">
+            <label class="container_chackbox">
+              <input class="checkbox_input" onchange="stove_toggle(this.checked)" id="stove-toggle" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div id="Provodnik"><img src="vendor/images/Provodnik.png"></div>
+          <div id="Indicator"><img src="vendor/images/IndicatorOFF.png"></div>
+          <div id="LineLCR"><img src="vendor/images/LineLCR.png"></div>
+          <div class="box-text" id="PechOutputView">
+            <div><span id="stove-temperature" data-innerdata="20"> 20</span> <span>
+                &deg;</span></div>
+          </div>
+          <div id="PechFormOutput"><img src="vendor/images/PechFormOutput.png"></div>
+          <div id="LinePechOutput"><img src="vendor/images/LinePechOutput.png"></div>
+          <div id="Cap" style="display: none;"><img src="vendor/images/Cap.png"></div>
+          <div id="OutputLCR">
+            <div id="inductance_disabled" class="disabled LCROutputText"><span id="inductance" data-innerdata="20">
+                20</span><span id="inductance_size"> мГн</span></div>
+          </div>
+          <div id="LCRBUtton"><label class="container_chackbox">
+              <input class="checkbox_input" onchange="inductance_toggle(this.checked)" id="inductance-toggle" type="checkbox">
+              <span class="checkmark dot"></span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4" style="display: none;">
           <div
             class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
@@ -47,19 +77,21 @@
                 <h3 class="mb-0">LCR-метр</h3>
                 <label for="inductance">
                   <h5 class="mb-0">подключен к материалу</h5>
-                </label><!--<span id="inductance_size">* 10<sup><small>-3</small></sup>-->
-                <div id="inductance_disabled" class="disabled box-text"><span id="inductance" data-innerdata="20"> 20</span><span id="inductance_size"> мГн</span></div>
+                </label>
+                <!--<span id="inductance_size">* 10<sup><small>-3</small></sup>
+                <div id="inductance_disabled" class="disabled box-text"><span id="inductance" data-innerdata="20">
+                    20</span><span id="inductance_size"> мГн</span></div>-->
                 <label for="inductance-toggle">
                   <h5 class="mb-0">Выключатель</h5>
                 </label>
-                <input onchange="inductance_toggle(this.checked)" id="inductance-toggle" type="checkbox" data-toggle="toggle"
-                  data-onstyle="outline-primary" data-offstyle="outline-secondary">
-                <div style="margin-left: 0;"><img src="vendor/LCR.jpg" width="250px" ></div>
+                <!--<input onchange="inductance_toggle(this.checked)" id="inductance-toggle" type="checkbox"
+                  data-toggle="toggle" data-onstyle="outline-primary" data-offstyle="outline-secondary">-->
+                <div style="margin-left: 0;"><img src="vendor/LCR.jpg" width="250px"></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" style="display: none;">
           <div
             class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
@@ -68,14 +100,14 @@
                 <label for="box-text">
                   <h5 class="mb-0">Температура</h5>
                 </label>
-                <div class="box-text"><span id="stove-temperature" data-innerdata="20"> 20</span> <span> &deg;</span>
-                </div>
+                <!--<div class="box-text"><span id="stove-temperature" data-innerdata="20"> 20</span> <span> &deg;</span>
+                </div>-->
                 <label for="stove-toggle">
                   <h5 class="mb-0">Выключатель</h5>
                 </label>
                 <input onchange="stove_toggle(this.checked)" id="stove-toggle" type="checkbox" data-toggle="toggle"
                   data-onstyle="outline-primary" data-offstyle="outline-secondary">
-                  <div style="margin-left: 21%;"><img src="vendor/pech.png" width="150px"></div>
+                <div style="margin-left: 21%;"><img src="vendor/pech.png" width="150px"></div>
               </div>
             </div>
           </div>
@@ -154,7 +186,8 @@
           </div>
           <img src="vendor/variant1.png" width="350px" style="margin: auto;">
           <div class="modal-footer">
-            <button onclick="changeOption(document.getElementById('select'))" type="button" class="btn btn-primary">Подтвердить</button>
+            <button onclick="changeOption(document.getElementById('select'))" type="button"
+              class="btn btn-primary">Подтвердить</button>
           </div>
         </div>
       </div>
@@ -171,7 +204,7 @@
   <script>window.$ = window.jsPDF = require('jspdf');</script>
 
   <script>window.$ = window.autotable = require('jspdf-autotable');</script>
- 
+
   <script src="vendor/charts/Chart.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

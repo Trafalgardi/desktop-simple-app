@@ -9,10 +9,10 @@ function createWindow () {
       nodeIntegration: true,
       defaultEncoding: 'UTF-8'
     },
-    minWidth: 1000,
+    minWidth: 1204,
     minHeight: 900,
     center: true,
-    width: 1000,
+    width: 1204,
     height: 900,
     frame: false
   })

@@ -30,7 +30,7 @@ init(1)
 function init(variant) {
   document.getElementById("n").value = n
   inductance_size.innerHTML = ""
-  inductance.innerHTML = "0";
+  inductance.innerHTML = "";
   lCalc();
   sCalc();
 }
@@ -98,18 +98,24 @@ function changeOption(select) {
 
 function stove_toggle(isActived) {
   clearInterval(timerId)
+  let indecator = document.getElementById("Indicator");
+  let cap = document.getElementById("Cap")
   if (isActived) {
     startTimer(stove_on)
+    cap.style.display = ""
+    indecator.innerHTML = '<img src="vendor/images/IndicatorON.png">';
   } else {
+    indecator.innerHTML = '<img src="vendor/images/IndicatorOFF.png">';
+    cap.style.display = "none"
     startTimer(stove_off)
   }
 }
 
 function inductance_toggle(bool) {
+
   isInductanceActived = bool
   var value = parseInt(getData("stove-temperature"), 10)
   var element = document.getElementById("inductance_disabled");
-
 
   if (isInductanceActived) {
     element.classList.remove("disabled");
@@ -117,7 +123,7 @@ function inductance_toggle(bool) {
     InductanceCalc(value)
   } else {
     inductance_size.innerHTML = "";
-    inductance.innerHTML = "0";
+    inductance.innerHTML = "";
     element.classList.add("disabled");
   }
 }
@@ -148,7 +154,7 @@ function stove_off() {
 }
 
 function startTimer(func) {
-  timerId = setInterval(() => func(), 5000);
+  timerId = setInterval(() => func(), 1000);
 }
 
 function getData(element_id) {

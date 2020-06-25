@@ -1,0 +1,204 @@
+ body {
+	margin: 0;
+	padding: 0;
+ }
+ 
+ #background 
+{ 
+	 left: 0px; 
+	 top: 0px; 
+	 position: relative; 
+	 margin-left: auto; 
+	 margin-right: auto; 
+	 width: 726px;
+	 height: 575px; 
+	 overflow: hidden;
+	 z-index:0;
+	} 
+
+ #Layer0 
+{ 
+	 left: -81px; 
+	 top: -66px; 
+	 position: absolute; 
+	 width: 841px;
+	 height: 667px;
+	 z-index:1;
+} 
+
+ #LCR 
+{ 
+	 left: 4px; 
+	 top: 6px; 
+	 position: absolute; 
+	 width: 468px;
+	 height: 281px;
+	 z-index:2;
+} 
+
+ #Pech 
+{ 
+	 left: 357px; 
+	 top: 261px; 
+	 position: absolute; 
+	 width: 365px;
+	 height: 313px;
+	 z-index:3;
+} 
+
+ #PechButton 
+{ 
+	 left: 614px; 
+	 top: 509px; 
+	 position: absolute; 
+	 width: 55px;
+	 height: 55px;
+	 z-index:4;
+} 
+
+ #Provodnik 
+{ 
+	 left: 474px; 
+	 top: 345px; 
+	 position: absolute; 
+	 width: 118px;
+	 height: 109px;
+	 z-index:5;
+} 
+
+ #Indicator 
+{ 
+	 left: 412px; 
+	 top: 509px; 
+	 position: absolute; 
+	 width: 55px;
+	 height: 55px;
+	 z-index:6;
+} 
+
+ #LineLCR 
+{ 
+	 left: 238px; 
+	 top: 260px; 
+	 position: absolute; 
+	 width: 255px;
+	 height: 176px;
+	 z-index:7;
+} 
+
+ #PechOutputView 
+{ 
+	 left: 560px; 
+	 top: 103px; 
+	 position: absolute; 
+	 width: 101px;
+	 height: 60px;
+	 z-index:8;
+} 
+
+ #PechFormOutput 
+{ 
+	 left: 551px; 
+	 top: 90px; 
+	 position: absolute; 
+	 width: 120px;
+	 height: 151px;
+	 z-index:9;
+} 
+
+ #LinePechOutput 
+{ 
+	 left: 573px; 
+	 top: 219px; 
+	 position: absolute; 
+	 width: 75px;
+	 height: 166px;
+	 z-index:10;
+} 
+
+ #Cap 
+{ 
+	 left: 421px; 
+	 top: 279px; 
+	 position: absolute; 
+	 width: 238px;
+	 height: 238px;
+	 z-index:11;
+
+} 
+
+ #OutputLCR 
+{ 
+	 left: 26px; 
+	 top: 90px; 
+	 position: absolute; 
+	 width: 219px;
+	 height: 54px;
+	 z-index:12;
+	 font-size: 25;
+} 
+
+.LCROutputText{
+	font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(0, 255, 0);
+    background-clip: padding-box;
+    border: 3px solid black;
+}
+.dot {
+	height: 68px;
+	width: 68px;
+	border-radius: 50%;
+	display: inline-block;
+  }
+
+ #LCRBUtton 
+{ 
+	 left: 342px; 
+	 top: 203px; 
+	 position: absolute; 
+	 width: 68px;
+	 height: 68px;
+	 z-index:13;
+} 
+
+/* The container_checkbox */
+.container_checkbox {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container_checkbox input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: grey;
+  }
+
+  
+  /* When the checkbox is checked, add a blue background */
+  .container_chackbox input:checked ~ .checkmark {
+	background-color: black;
+  }
+  
