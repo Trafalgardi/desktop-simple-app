@@ -88,24 +88,23 @@
 
  #PechOutputView 
 { 
-	 left: 560px; 
-	 top: 103px; 
-	 position: absolute; 
-	 width: 101px;
-	 height: 60px;
-	 z-index:8;
-} 
+	left: 585px;
+    top: 75px;
+    position: absolute;
+    width: 90px;
+    height: 45px;
+    z-index: 9;
+}
 
  #PechFormOutput 
 { 
-	 left: 551px; 
-	 top: 90px; 
-	 position: absolute; 
-	 width: 120px;
-	 height: 151px;
-	 z-index:9;
-} 
-
+	left: 538px;
+    top: 10px;
+    position: absolute;
+    width: 120px;
+    height: 151px;
+    z-index: 8;
+}
  #LinePechOutput 
 { 
 	 left: 573px; 

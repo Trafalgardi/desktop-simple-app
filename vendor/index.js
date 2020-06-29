@@ -33,6 +33,7 @@ function init(variant) {
   inductance.innerHTML = "";
   lCalc();
   sCalc();
+  document.getElementById("record").disabled = true;
 }
 
 //#region Calc
@@ -65,8 +66,20 @@ function InductanceCalc(temperature) {
   let one = M * m0;
   let two = one * Math.pow(n, 2);
   let three = two * s / l;
-  setData("inductance", (three / 1000000).toFixed(4))
-  inductance.innerHTML = (three / 1000000).toFixed(4);
+  
+  let random;
+  let four;
+  if(randomInteger(1,2) == 1){
+    random = randomInteger(1, 10);
+    let procent = three / 100 * random
+    four = three + procent
+  }else{
+    random = randomInteger(1, 10);
+    let procent = three / 100 * random
+    four = three - procent
+  }
+  setData("inductance", (four / 1000000).toFixed(4))
+  inductance.innerHTML = (four / 1000000).toFixed(4);
 }
 //l-Длина средней линии - (D+d/2)pi
 function lCalc() {
@@ -85,6 +98,16 @@ function sCalc() {
   console.log(three)
   s = three;
   document.getElementById("s").value = three.toFixed(3)
+}
+function randomInteger(min, max) {
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  return Math.round(rand);
+}
+function setS(input){
+  s = input
+}
+function setL(input) {
+  l = input
 }
 //#endregion
 
@@ -120,11 +143,13 @@ function inductance_toggle(bool) {
   if (isInductanceActived) {
     element.classList.remove("disabled");
     inductance_size.innerHTML = " мГн";
+    document.getElementById("record").disabled = false;
     InductanceCalc(value)
   } else {
     inductance_size.innerHTML = "";
     inductance.innerHTML = "";
     element.classList.add("disabled");
+    document.getElementById("record").disabled = true;
   }
 }
 const step = 1;

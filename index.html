@@ -55,7 +55,7 @@
             <div><span id="stove-temperature" data-innerdata="20"> 20</span> <span>
                 &deg;</span></div>
           </div>
-          <div id="PechFormOutput"><img src="vendor/images/PechFormOutput.png"></div>
+          <div id="PechFormOutput"><img width="150px" src="vendor/images/Temp.png"></div>
           <div id="LinePechOutput"><img src="vendor/images/LinePechOutput.png"></div>
           <div id="Cap" style="display: none;"><img src="vendor/images/Cap.png"></div>
           <div id="OutputLCR">
@@ -80,11 +80,11 @@
               </div>
               <div class="">
                 <label for="l">Длина средней линии</label>
-                <input type="text" class="form-control" id="l" value="">
+                <input onchange="setL(this.value)" type="text" class="form-control" id="l" value="">
               </div>
               <div class="">
                 <label for="s">Площадь поперечного сечения</label>
-                <input type="text" class="form-control" id="s" value="">
+                <input onchange="setS(this.value)" type="text" class="form-control" id="s" value="">
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@
       <div id="ignorePDF" class="row mb-2">
         <div class="col-md-2">
           <div class="row mb-4" style="margin: 0">
-            <button type="button" onclick="recordData()" class="btn btn-outline-primary btn-block">Запись</button>
+            <button id="record" type="button" onclick="recordData()" class="btn btn-outline-primary btn-block">Запись</button>
             <button type="button" onclick="createChart()" class="btn btn-outline-primary btn-block">График</button>
             <button type="button" onclick="saveTable()" class="btn btn-outline-primary btn-block">Сохранить</button>
           </div>
