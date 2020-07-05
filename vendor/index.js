@@ -6,6 +6,7 @@ let stove_temperature = document.getElementById("stove-temperature");
 let inductance = document.getElementById("inductance");
 let inductance_size = document.getElementById("inductance_size");
 let isInductanceActived = false;
+let genry_table = document.getElementById("genry_table")
 
 let x = [20, 30, 50, 76, 100, 117, 123, 128, 133, 139, 144, 147, 149, 150]
 //let x = [20, 30, 40, 50, 70, 80, 90, 94, 98, 100, 106, 110, 114, 120, 130, 140, 150]
@@ -24,15 +25,19 @@ let m0 = 200;
 let l = 0;
 //s- площадь поперечного сечения
 let s = 0;
-
+let genry = false;
 //Выбор варианты
 function init(variant) {
   var json = JSON.parse(variant)
   if(json.v === 0){
+    genry = false;
+    genry_table.innerHTML = "L, мГн"
     x = [20, 30, 40, 50, 70, 80, 90, 94, 98, 100, 106, 110, 114, 120, 130, 140, 150];
     y = [210, 211, 212, 218, 238, 254, 263, 264, 258, 250, 200, 145, 95, 37, 7, 3, 2];
     m0 = 200;
   }else{
+    genry = true;
+    genry_table.innerHTML = "L, Гн"
     x = [20, 30, 50, 76, 100, 117, 123, 128, 133, 139, 144, 147, 149, 150];
     y = [4000, 4320, 4600, 4900, 5350, 5810, 5980, 5820, 5000, 3000, 1000, 150, 40, 25];
     m0 = 4000;
@@ -43,6 +48,7 @@ function init(variant) {
   document.getElementById("n").value = n
   inductance_size.innerHTML = ""
   inductance.innerHTML = "";
+  
   lCalc();
   sCalc();
   document.getElementById("record").disabled = true;
@@ -90,8 +96,14 @@ function InductanceCalc(temperature) {
     let procent = three / 100 * random
     four = three - procent
   }
-  setData("inductance", (four / 1000000).toFixed(4))
-  inductance.innerHTML = (four / 1000000).toFixed(4);
+  if(genry){
+    setData("inductance", (four / 1000000000).toFixed(4))
+    inductance.innerHTML = (four / 1000000000).toFixed(4);
+  }else{
+    setData("inductance", (four / 1000000).toFixed(4))
+    inductance.innerHTML = (four / 1000000).toFixed(4);
+  }
+  
 }
 //l-Длина средней линии - (D+d/2)pi
 function lCalc() {
@@ -156,7 +168,17 @@ function inductance_toggle(bool) {
 
   if (isInductanceActived) {
     element.classList.remove("disabled");
-    inductance_size.innerHTML = " мГн";
+    
+    if(genry)
+      {
+        genry_table.innerHTML = "L, Гн";
+        inductance_size.innerHTML = " Гн";
+      }
+      else
+      {
+        genry_table.innerHTML = "L, мГн";
+        inductance_size.innerHTML = " мГн";
+      }
     document.getElementById("record").disabled = false;
     InductanceCalc(value)
   } else {
@@ -287,8 +309,13 @@ function saveTable() {
   //doc.text(`Bap: ${option}`, 35, 25);
 
   doc.text("Table", 35, 50);
+  var columns = ["#", "T, C°", "L, Gn"]
+  if(genry){
+    columns = ["#", "T, C°", "L, Gn"]
+  }else{
+    columns = ["#", "T, C°", "L, mGn"]
+  }
 
-  var columns = ["#", "T, oC", "L, Gn"]
   var rows = []
   for (let i = 1; i < dataCharts.length; i++) {
     let t = [i, temps[i], dataCharts[i]]
