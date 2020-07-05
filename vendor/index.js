@@ -28,7 +28,7 @@ let s = 0;
 
 
 
-
+//Выбор варианты
 function init(variant) {
   var json = JSON.parse(variant)
   n = json.n
@@ -45,7 +45,7 @@ function init(variant) {
 //#region Calc
 //Индуктивность L= M * M0 * n^2 * S / l
 
-
+//Подсчет интерполяции
 function interpolation(temperature, i) {
   const nearestBelow = (input, lookup) => lookup.reduce((prev, curr) => input >= curr ? curr : prev);
   let x0 = nearestBelow(i, x);
@@ -57,7 +57,7 @@ function interpolation(temperature, i) {
 
   return Y
 }
-
+//Подсчет индукции
 function InductanceCalc(temperature) {
 
   let M = 0;
@@ -105,21 +105,21 @@ function sCalc() {
   s = three;
   document.getElementById("s").value = three.toFixed(3)
 }
-
+//рандом между двумя целачислиными числами
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
-
+//запись S в переменную
 function setS(input) {
   s = input
 }
-
+//запись L в переменную
 function setL(input) {
   l = input
 }
 //#endregion
-
+//смена окон между выбором варианта и основным окном 
 function changeOption(select) {
   var selected = select.options[select.selectedIndex].value;
   document.getElementById("option").style.display = "none"
@@ -127,7 +127,7 @@ function changeOption(select) {
   //document.getElementById("title").innerHTML = `Вариант ${selected}`
   init(selected)
 }
-
+//Нажатия на кнопку печки
 function stove_toggle(isActived) {
   clearInterval(timerId)
   let indecator = document.getElementById("Indicator");
@@ -142,7 +142,7 @@ function stove_toggle(isActived) {
     startTimer(stove_off)
   }
 }
-
+//Нажатия на кнопку индукции
 function inductance_toggle(bool) {
 
   isInductanceActived = bool
@@ -162,7 +162,7 @@ function inductance_toggle(bool) {
   }
 }
 const step = 1;
-
+//Включение печки
 function stove_on() {
   var value = parseInt(getData("stove-temperature"), 10)
   if (value === 150) {
@@ -174,7 +174,7 @@ function stove_on() {
   stove_temperature.innerHTML = value;
   if (isInductanceActived) InductanceCalc(value)
 }
-
+//Выключение печки
 function stove_off() {
   var value = parseInt(getData("stove-temperature"), 10)
   if (value === 20) {
@@ -186,17 +186,17 @@ function stove_off() {
   stove_temperature.innerHTML = value;
   if (isInductanceActived) InductanceCalc(value)
 }
-
+//Таймер печки
 function startTimer(func) {
-  timerId = setInterval(() => func(), 1000);
+  timerId = setInterval(() => func(), 5000);
 }
-
+//Получение данных по id элемента
 function getData(element_id) {
   var el = document.getElementById(element_id)
   console.log(el.dataset.innerdata);
   return el.dataset.innerdata
 }
-
+//Запись данных по id элемента
 function setData(element_id, data) {
   var el = document.getElementById(element_id)
   el.dataset.innerdata = data;
@@ -210,7 +210,7 @@ let indexRow = 0;
 let table = document.getElementById("table")
 let temps = []
 let dataCharts = []
-
+//Кнопка записать данные
 function recordData() {
   indexRow++;
   var data = `
@@ -223,7 +223,7 @@ function recordData() {
   dataCharts.push(getData("inductance"))
   table.insertAdjacentHTML("beforeend", data)
 }
-
+//Кнопка очистить данные
 function clearData() {
   indexRow = 0;
   temps = [0]
@@ -232,6 +232,7 @@ function clearData() {
 }
 //labels: temps,
 //      data: dataCharts,
+//Создание графика
 function createChart() {
   let data = {
     labels: temps,
@@ -271,7 +272,7 @@ function createChart() {
     options: chartOptions
   });
 }
-
+//Сохранение pdf
 function saveTable() {
   const doc = new jsPDF();
 
