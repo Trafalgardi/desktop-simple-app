@@ -7,27 +7,33 @@ let inductance = document.getElementById("inductance");
 let inductance_size = document.getElementById("inductance_size");
 let isInductanceActived = false;
 
-const x = [20, 30, 40, 50, 70, 80, 90, 94, 98, 100, 106, 110, 114, 120, 130, 140, 150]
+const x = [20, 30, 50, 76, 100, 117, 123, 128, 133, 139, 144, 147, 149, 150]
+//const x = [20, 30, 40, 50, 70, 80, 90, 94, 98, 100, 106, 110, 114, 120, 130, 140, 150]
 //М- магнитнитная проницаемость из экспериментальных данных
-const y = [210, 211, 212, 218, 238, 254, 263, 264, 258, 250, 200, 145, 95, 37, 7, 3, 2]
+const y = [4000, 4320, 4600, 4900, 5350, 5810, 5980, 5820, 5000, 3000, 1000, 150, 40, 25]
+//const y = [210, 211, 212, 218, 238, 254, 263, 264, 258, 250, 200, 145, 95, 37, 7, 3, 2]
 //Табличные данные
 //Число витков
 let n = 10;
 let D = 2.5;
 let d = 1.5;
-
 //М0- начальная магнитная проницаемость
 let m0 = 80;
+
 //l-Длина средней линии
 let l = 0;
 //s- площадь поперечного сечения
 let s = 0;
 
-let option;
 
-init(1)
+
+
 
 function init(variant) {
+  var json = JSON.parse(variant)
+  n = json.n
+  d = json.d
+  D = json.D
   document.getElementById("n").value = n
   inductance_size.innerHTML = ""
   inductance.innerHTML = "";
@@ -44,36 +50,36 @@ function interpolation(temperature, i) {
   const nearestBelow = (input, lookup) => lookup.reduce((prev, curr) => input >= curr ? curr : prev);
   let x0 = nearestBelow(i, x);
 
-  let x1 = x[x.indexOf(nearestBelow(i, x))+1];
+  let x1 = x[x.indexOf(nearestBelow(i, x)) + 1];
   let y0 = y[x.indexOf(nearestBelow(i, x))];
-  let y1 = y[x.indexOf(nearestBelow(i, x))+1];
+  let y1 = y[x.indexOf(nearestBelow(i, x)) + 1];
   let Y = y0 + (temperature - x0) * ((y1 - y0) / (x1 - x0));
 
   return Y
 }
 
 function InductanceCalc(temperature) {
-  
+
   let M = 0;
   if (x.indexOf(temperature) == -1) {
-    
+
     M = interpolation(temperature, temperature)
     console.log(M)
-  }else{
+  } else {
     M = y[x.indexOf(temperature)]
     console.log(M)
   }
   let one = M * m0;
   let two = one * Math.pow(n, 2);
   let three = two * s / l;
-  
+
   let random;
   let four;
-  if(randomInteger(1,2) == 1){
+  if (randomInteger(1, 2) == 1) {
     random = randomInteger(1, 10);
     let procent = three / 100 * random
     four = three + procent
-  }else{
+  } else {
     random = randomInteger(1, 10);
     let procent = three / 100 * random
     four = three - procent
@@ -99,13 +105,16 @@ function sCalc() {
   s = three;
   document.getElementById("s").value = three.toFixed(3)
 }
+
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
-function setS(input){
+
+function setS(input) {
   s = input
 }
+
 function setL(input) {
   l = input
 }
@@ -116,7 +125,7 @@ function changeOption(select) {
   document.getElementById("option").style.display = "none"
   document.getElementById("main").style.display = ""
   //document.getElementById("title").innerHTML = `Вариант ${selected}`
-  option = selected
+  init(selected)
 }
 
 function stove_toggle(isActived) {
@@ -269,7 +278,7 @@ function saveTable() {
   doc.setFont('Roboto-Regular', 'normal');
   doc.setFontSize(40);
 
-  doc.text(`Bap: ${option}`, 35, 25);
+  //doc.text(`Bap: ${option}`, 35, 25);
 
   doc.text("Table", 35, 50);
 

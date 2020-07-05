@@ -79,11 +79,11 @@
                 <input type="text" class="form-control" id="n" value="" disabled>
               </div>
               <div class="">
-                <label for="l">Длина средней линии</label>
+                <label for="l">Длина средней линии (мм)</label>
                 <input onchange="setL(this.value)" type="text" class="form-control" id="l" value="">
               </div>
               <div class="">
-                <label for="s">Площадь поперечного сечения</label>
+                <label for="s">Площадь поперечного сечения (мм)</label>
                 <input onchange="setS(this.value)" type="text" class="form-control" id="s" value="">
               </div>
             </div>
@@ -135,9 +135,9 @@
           </div>
           <div class="modal-body">
             <select id="select" class="custom-select">
-              <option value="1">Вариант 1</option>
-              <option value="2">Вариант 2</option>
-              <option value="3">Вариант 3</option>
+              <option value='{"n": 10, "D": 10,   "d": 6  }'>Вариант 1</option>
+              <option value='{"n": 20, "D": 12.5, "d": 7.5}'>Вариант 2</option>
+              <option value='{"n": 30, "D": 16,   "d": 9.6}'>Вариант 3</option>
             </select>
           </div>
           <img src="vendor/variant1.png" width="350px" style="margin: auto;">
