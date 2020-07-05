@@ -95,9 +95,8 @@ function InductanceCalc(temperature) {
 }
 //l-Длина средней линии - (D+d/2)pi
 function lCalc() {
-  let one = d / 2;
-  let two = D + one;
-  let three = two * Math.PI;
+  let one = (D + d) / 2;
+  let three = one * Math.PI;
   console.log(three)
   l = three;
   document.getElementById("l").value = three.toFixed(3)
@@ -194,7 +193,7 @@ function stove_off() {
 }
 //Таймер печки
 function startTimer(func) {
-  timerId = setInterval(() => func(), 5000);
+  timerId = setInterval(() => func(), 1000);
 }
 //Получение данных по id элемента
 function getData(element_id) {
