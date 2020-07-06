@@ -7,6 +7,9 @@ let inductance = document.getElementById("inductance");
 let inductance_size = document.getElementById("inductance_size");
 let isInductanceActived = false;
 let genry_table = document.getElementById("genry_table")
+let input_d = document.getElementById("d");
+let input_D = document.getElementById("D");
+let input_H = document.getElementById("H");
 
 let x = [20, 30, 50, 76, 100, 117, 123, 128, 133, 139, 144, 147, 149, 150]
 //let x = [20, 30, 40, 50, 70, 80, 90, 94, 98, 100, 106, 110, 114, 120, 130, 140, 150]
@@ -18,6 +21,7 @@ let y = [4000, 4320, 4600, 4900, 5350, 5810, 5980, 5820, 5000, 3000, 1000, 150, 
 let n = 10;
 let D = 2.5;
 let d = 1.5;
+let H = 1.5;
 //М0- магнитная  постоянная
 let m0 = 200;
 
@@ -45,6 +49,11 @@ function init(variant) {
   n = json.n
   d = json.d
   D = json.D
+
+  input_d.value = json.d
+  input_D.value = json.D
+  input_H.value = json.H
+
   document.getElementById("n").value = n
   inductance_size.innerHTML = ""
   inductance.innerHTML = "";
@@ -88,11 +97,11 @@ function InductanceCalc(temperature) {
   let random;
   let four;
   if (randomInteger(1, 2) == 1) {
-    random = randomInteger(1, 10);
+    random = randomInteger(1, 2);
     let procent = three / 100 * random
     four = three + procent
   } else {
-    random = randomInteger(1, 10);
+    random = randomInteger(1, 2);
     let procent = three / 100 * random
     four = three - procent
   }
@@ -111,30 +120,23 @@ function lCalc() {
   let three = one * Math.PI;
   console.log(three)
   l = three;
-  document.getElementById("l").value = three.toFixed(3)
+  //document.getElementById("l").value = three.toFixed(3)
 }
-//S- площадь поперечного сечения (pi*d^2/4)
+//S- площадь поперечного сечения (pi*d^2/4) new ((D-d) / 2) * H
 function sCalc() {
-  let one = Math.pow(d, 2);
-  let two = Math.PI * one;
-  let three = two / 4;
+  let one = D - d;
+  let two = one / 2;
+  let three = two * H;
   console.log(three)
   s = three;
-  document.getElementById("s").value = three.toFixed(3)
+  //document.getElementById("s").value = three.toFixed(3)
 }
 //рандом между двумя целачислиными числами
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
-//запись S в переменную
-function setS(input) {
-  s = input
-}
-//запись L в переменную
-function setL(input) {
-  l = input
-}
+
 //#endregion
 //смена окон между выбором варианта и основным окном 
 function changeOption(select) {

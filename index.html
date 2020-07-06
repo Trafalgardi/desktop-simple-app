@@ -79,12 +79,16 @@
                 <input type="text" class="form-control" id="n" value="" disabled>
               </div>
               <div class="">
-                <label for="l">Длина средней линии (мм)</label>
-                <input onchange="setL(this.value)" type="text" class="form-control" id="l" value="">
+                <label for="D">Диаметр наружнего кольца (мм)</label>
+                <input type="text" class="form-control" id="D" value="" disabled>
               </div>
               <div class="">
-                <label for="s">Площадь поперечного сечения (мм<sup>2</sup>)</label>
-                <input onchange="setS(this.value)" type="text" class="form-control" id="s" value="">
+                <label for="d">Диаметр внутренего кольца (мм)</label>
+                <input type="text" class="form-control" id="d" value="" disabled>
+              </div>
+              <div class="">
+                <label for="H">Высота ферритового кольца (мм)</label>
+                <input type="text" class="form-control" id="H" value="" disabled>
               </div>
             </div>
           </div>
@@ -135,12 +139,12 @@
           </div>
           <div class="modal-body">
             <select id="select" class="custom-select">
-              <option value='{"v": 0,"n": 10, "D": 10,   "d": 6  }'>Вариант 1</option>
-              <option value='{"v": 0,"n": 20, "D": 12.5, "d": 7.5}'>Вариант 2</option>
-              <option value='{"v": 0,"n": 30, "D": 16,   "d": 9.6}'>Вариант 3</option>
-              <option value='{"v": 1,"n": 10, "D": 10,   "d": 6  }'>Вариант 4</option>
-              <option value='{"v": 1,"n": 20, "D": 12.5, "d": 7.5}'>Вариант 5</option>
-              <option value='{"v": 1,"n": 30, "D": 16,   "d": 9.6}'>Вариант 6</option>
+              <option value='{"v": 0,"n": 10, "D": 10,   "d": 6  , "H": 4  }'>Вариант 1</option>
+              <option value='{"v": 0,"n": 20, "D": 12.5, "d": 7.5, "H": 5.5}'>Вариант 2</option>
+              <option value='{"v": 0,"n": 30, "D": 16,   "d": 9.6, "H": 6.3}'>Вариант 3</option>
+              <option value='{"v": 1,"n": 10, "D": 10,   "d": 6  , "H": 4  }'>Вариант 4</option>
+              <option value='{"v": 1,"n": 20, "D": 12.5, "d": 7.5, "H": 5.5}'>Вариант 5</option>
+              <option value='{"v": 1,"n": 30, "D": 16,   "d": 9.6, "H": 6.3}'>Вариант 6</option>
             </select>
           </div>
           <img src="vendor/variant1.png" width="350px" style="margin: auto;">
